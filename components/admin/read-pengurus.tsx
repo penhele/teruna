@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/table";
 import { getPengurus } from "@/lib/data";
 import { formatSektor } from "@/lib/utils";
-import { PiPencilLight, PiTrashSimpleLight } from "react-icons/pi";
+import { DeleteButton, UpdateButton } from "./button";
 
 const ReadPengurus = async () => {
   const pengurusList = await getPengurus();
@@ -31,9 +31,9 @@ const ReadPengurus = async () => {
             <TableCell>{item.position}</TableCell>
             <TableCell>{formatSektor(item.sektor)}</TableCell>
             <TableCell>
-              <div className="flex gap-3">
-                <PiPencilLight />
-                <PiTrashSimpleLight />
+              <div className="flex gap-1">
+                <UpdateButton id={item.id} />
+                <DeleteButton id={item.id} />
               </div>
             </TableCell>
           </TableRow>

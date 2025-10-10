@@ -3,6 +3,7 @@
 import { prisma } from "@/lib/prisma";
 import { PengurusSchema } from "./zod";
 import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 
 export const SavePengurus = async (prevState: unknown, formData: FormData) => {
   const rawData = {
@@ -31,3 +32,16 @@ export const SavePengurus = async (prevState: unknown, formData: FormData) => {
 
   redirect("/dashboard/pengurus");
 };
+
+// Delete
+export const DeletePengurus = async (id: string) => {
+    try {
+        await prisma.pengurus.delete({
+            where: {id}
+        })
+    } catch (error) {
+        console.log()
+    }
+
+    revalidatePath("/admin/pengurus")
+}

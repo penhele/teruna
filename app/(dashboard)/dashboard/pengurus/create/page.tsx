@@ -1,4 +1,4 @@
-import CreateFormPengurus from "@/components/create-form-pengurus";
+import CreateFormPengurus from "@/components/admin/create-form-pengurus";
 import React from "react";
 
 const CreatePage = () => {

@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import ReadPengurus from "@/components/read-pengurut";
+import ReadPengurus from "@/components/admin/read-pengurus";
 
 const PengurusPage = () => {
   return (

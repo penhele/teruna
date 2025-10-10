@@ -14,6 +14,12 @@ import {
 import { ChevronRight } from "lucide-react";
 import clsx from "clsx";
 import { formatSektor } from "@/lib/utils";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Calendar } from "@/components/ui/calendar";
 
 const CreateFormPengurus = () => {
   const [sektorList, setSektorList] = useState<string[]>([]);
@@ -22,6 +28,8 @@ const CreateFormPengurus = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [openSektor, setOpenSektor] = useState(false);
   const [openCategory, setOpenCategory] = useState(false);
+  const [openCalendar, setOpenCalendar] = useState(false);
+  const [date, setDate] = useState<Date | undefined>(undefined);
 
   useEffect(() => {
     const fetchEnums = async () => {
@@ -46,21 +54,65 @@ const CreateFormPengurus = () => {
     <form action={formAction}>
       <div className="flex flex-col gap-3">
         {/* Nama */}
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-2">
           <Label>Name</Label>
           <Input name="name" placeholder="Stephen" />
           <span className="text-red-500">{state?.error.name}</span>
         </div>
 
         {/* Phone */}
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-2">
           <Label>Phone</Label>
-          <Input name="position" placeholder="Ketua" />
+          <Input name="phone" placeholder="0818..." />
           <span className="text-red-500">{state?.error.position}</span>
         </div>
 
-        {/* Phone */}
-        <div className="flex flex-col gap-1">
+        {/* Birth */}
+        <div className="flex flex-col gap-2">
+          <Label>Birth</Label>
+          <Popover open={openCalendar} onOpenChange={setOpenCalendar}>
+            <PopoverTrigger asChild>
+              <Button variant={"outline"} className="flex justify-between">
+                <span
+                  className={clsx("font-normal", {
+                    "text-gray-500": !date,
+                  })}
+                >
+                  {date ? date.toLocaleDateString() : "Select date"}
+                </span>
+                <span
+                  className={`transition-transform duration-200 ${
+                    openCalendar ? "rotate-90" : "rotate-0"
+                  }`}
+                >
+                  <ChevronRight className="h-4 w-4" />
+                </span>
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent
+              className="w-auto overflow-hidden p-0"
+              align="start"
+            >
+              <Calendar
+                mode="single"
+                selected={date}
+                captionLayout="dropdown"
+                onSelect={(date) => {
+                  setDate(date);
+                  setOpenCalendar(false);
+                }}
+              />
+            </PopoverContent>
+          </Popover>
+          <input
+            name="birth"
+            type="hidden"
+            value={date ? date.toLocaleDateString() : ""}
+          />
+        </div>
+
+        {/* Category */}
+        <div className="flex flex-col gap-2">
           <Label>Category</Label>
           <DropdownMenu onOpenChange={setOpenCategory}>
             <DropdownMenuTrigger asChild>
@@ -93,18 +145,18 @@ const CreateFormPengurus = () => {
               ))}
             </DropdownMenuContent>
           </DropdownMenu>
-          <input name="sektor" type="hidden" value={selectedCategory} />
+          <input name="category" type="hidden" value={selectedCategory} />
         </div>
 
         {/* Position */}
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-2">
           <Label>Position</Label>
           <Input name="position" placeholder="Ketua" />
           <span className="text-red-500">{state?.error.position}</span>
         </div>
 
         {/* Sektor */}
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-2">
           <Label>Sektor</Label>
           <DropdownMenu onOpenChange={setOpenSektor}>
             <DropdownMenuTrigger asChild>

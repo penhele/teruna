@@ -51,7 +51,7 @@ model Pengurus {
   id       String   @id @default(cuid())
   name     String
   phone    String
-  birth    DateTime
+  birth    String
   category Category
   position String
   sektor   Sektor

@@ -1,5 +1,5 @@
-import { Sektor } from "@prisma/client";
 import { NextResponse } from "next/server";
+import { Sektor } from "@prisma/client";
 
 export async function GET() {
   const sektorValues = Object.values(Sektor);

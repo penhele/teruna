@@ -35,13 +35,13 @@ export const SavePengurus = async (prevState: unknown, formData: FormData) => {
 
 // Delete
 export const DeletePengurus = async (id: string) => {
-    try {
-        await prisma.pengurus.delete({
-            where: {id}
-        })
-    } catch (error) {
-        console.log()
-    }
+  try {
+    await prisma.pengurus.delete({
+      where: { id },
+    });
+  } catch (error) {
+    console.log();
+  }
 
-    revalidatePath("/admin/pengurus")
-}
+  revalidatePath("/admin/pengurus");
+};

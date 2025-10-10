@@ -48,8 +48,11 @@ model Account {
 }
 
 model Pengurus {
-  id       String @id @default(cuid())
+  id       String   @id @default(cuid())
   name     String
+  phone    String
+  birth    DateTime
+  category Category
   position String
   sektor   Sektor
 
@@ -65,4 +68,9 @@ enum Sektor {
   Sektor_4
   Sektor_5
   Sektor_6
+}
+
+enum Category {
+  Pengurus
+  Pelayan
 }

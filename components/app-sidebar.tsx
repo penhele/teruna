@@ -1,5 +1,3 @@
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react";
-
 import {
   Sidebar,
   SidebarContent,
@@ -10,18 +8,25 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { GrGroup } from "react-icons/gr";
+import { RiHome6Line } from "react-icons/ri";
+import { PiFinnTheHuman } from "react-icons/pi";
 
-// Menu items.
 const items = [
   {
     title: "Home",
-    url: "#",
-    icon: Home,
+    url: "/dashboard",
+    icon: RiHome6Line,
   },
   {
-    title: "Pengurus",
-    url: "/dashboard/pengurus",
-    icon: Home,
+    title: "Pelayan",
+    url: "/dashboard/pelayan",
+    icon: GrGroup,
+  },
+  {
+    title: "Teruna",
+    url: "/dashboard/teruna",
+    icon: PiFinnTheHuman,
   },
 ];
 

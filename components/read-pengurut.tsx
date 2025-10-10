@@ -7,6 +7,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { getPengurus } from "@/lib/data";
+import { formatSektor } from "@/lib/utils";
 import { PiPencilLight, PiTrashSimpleLight } from "react-icons/pi";
 
 const ReadPengurus = async () => {
@@ -28,7 +29,7 @@ const ReadPengurus = async () => {
           <TableRow key={item.id}>
             <TableCell>{item.name}</TableCell>
             <TableCell>{item.position}</TableCell>
-            <TableCell>Sektor {item.sektor}</TableCell>
+            <TableCell>{formatSektor(item.sektor)}</TableCell>
             <TableCell>
               <div className="flex gap-3">
                 <PiPencilLight />

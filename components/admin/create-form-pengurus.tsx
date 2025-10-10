@@ -64,7 +64,7 @@ const CreateFormPengurus = () => {
         <div className="flex flex-col gap-2">
           <Label>Phone</Label>
           <Input name="phone" placeholder="0818..." />
-          <span className="text-red-500">{state?.error.position}</span>
+          <span className="text-red-500">{state?.error.phone}</span>
         </div>
 
         {/* Birth */}
@@ -109,6 +109,7 @@ const CreateFormPengurus = () => {
             type="hidden"
             value={date ? date.toLocaleDateString() : ""}
           />
+          <span className="text-red-500">{state?.error.birth}</span>
         </div>
 
         {/* Category */}
@@ -146,12 +147,17 @@ const CreateFormPengurus = () => {
             </DropdownMenuContent>
           </DropdownMenu>
           <input name="category" type="hidden" value={selectedCategory} />
+          <span className="text-red-500">{state?.error.category}</span>
         </div>
 
         {/* Position */}
         <div className="flex flex-col gap-2">
           <Label>Position</Label>
-          <Input name="position" placeholder="Ketua" />
+          <Input
+            name="position"
+            placeholder="Ketua"
+            readOnly={selectedCategory !== "Pengurus"}
+          />
           <span className="text-red-500">{state?.error.position}</span>
         </div>
 
@@ -190,6 +196,7 @@ const CreateFormPengurus = () => {
             </DropdownMenuContent>
           </DropdownMenu>
           <input name="sektor" type="hidden" value={selectedSektor} />
+          <span className="text-red-500">{state?.error.sektor}</span>
         </div>
 
         <Button type="submit" disabled={isPending}>

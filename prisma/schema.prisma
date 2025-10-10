@@ -53,7 +53,7 @@ model Pengurus {
   phone    String
   birth    String
   category Category
-  position String
+  position String?
   sektor   Sektor
 
   createdAt DateTime @default(now())

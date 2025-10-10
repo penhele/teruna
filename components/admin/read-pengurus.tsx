@@ -7,7 +7,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { getPengurus } from "@/lib/data";
-import { formatSektor } from "@/lib/utils";
+import { formatDate, formatSektor } from "@/lib/utils";
 import { DeleteButton, UpdateButton } from "./button";
 
 const ReadPengurus = async () => {
@@ -18,8 +18,11 @@ const ReadPengurus = async () => {
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead>Nama</TableHead>
-          <TableHead>Jabatan</TableHead>
+          <TableHead>Name</TableHead>
+          <TableHead>Phone</TableHead>
+          <TableHead>Birth</TableHead>
+          <TableHead>Category</TableHead>
+          <TableHead>Position</TableHead>
           <TableHead>Sektor</TableHead>
           <TableHead>Action</TableHead>
         </TableRow>
@@ -28,6 +31,9 @@ const ReadPengurus = async () => {
         {pengurusList.map((item) => (
           <TableRow key={item.id}>
             <TableCell>{item.name}</TableCell>
+            <TableCell>{item.phone}</TableCell>
+            <TableCell>{formatDate(item.birth)}</TableCell>
+            <TableCell>{item.category}</TableCell>
             <TableCell>{item.position}</TableCell>
             <TableCell>{formatSektor(item.sektor)}</TableCell>
             <TableCell>

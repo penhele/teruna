@@ -8,6 +8,9 @@ import { revalidatePath } from "next/cache";
 export const SavePengurus = async (prevState: unknown, formData: FormData) => {
   const rawData = {
     name: formData.get("name"),
+    phone: formData.get("phone")?.toString() || "",
+    birth: formData.get("birth"),
+    category: formData.get("category"),
     position: formData.get("position"),
     sektor: formData.get("sektor"),
   };
@@ -16,12 +19,16 @@ export const SavePengurus = async (prevState: unknown, formData: FormData) => {
   if (!validatedFields.success)
     return { error: validatedFields.error.flatten().fieldErrors };
 
-  const { name, position, sektor } = validatedFields.data;
+  const { name, phone, birth, category, position, sektor } =
+    validatedFields.data;
 
   try {
     await prisma.pengurus.create({
       data: {
         name,
+        phone,
+        birth,
+        category,
         position,
         sektor,
       },

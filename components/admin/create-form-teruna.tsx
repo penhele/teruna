@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useActionState, useEffect, useState } from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import {
@@ -13,8 +13,13 @@ import { Button } from "@/components/ui/button";
 import clsx from "clsx";
 import { ChevronRight } from "lucide-react";
 import { formatSektor } from "@/lib/utils";
-import { Popover, PopoverContent  , PopoverTrigger } from "@/components/ui/popover";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
+import { SaveTeruna } from "@/lib/action";
 
 const CreateFormTeruna = () => {
   const [sektorList, setSektorList] = useState<string[]>([]);
@@ -40,21 +45,26 @@ const CreateFormTeruna = () => {
     fetchEnums();
   }, []);
 
+  const [state, formAction, isPending] = useActionState(
+    SaveTeruna.bind(null),
+    null,
+  );
+
   return (
-    <form action="">
+    <form action={formAction}>
       <div className="flex flex-col gap-3">
         {/* name */}
         <div className="flex flex-col gap-2">
           <Label>Name</Label>
           <Input name="name" placeholder="Stephen" />
+          <span className="text-red-500">{state?.error.name}</span>
         </div>
-
         {/* phone */}
         <div className="flex flex-col gap-2">
           <Label>Phone</Label>
           <Input name="phone" placeholder="0818..." />
+          <span className="text-red-500">{state?.error.phone}</span>
         </div>
-
         {/* Gender */}
         <div className="flex flex-col gap-2">
           <Label>Gender</Label>
@@ -90,8 +100,8 @@ const CreateFormTeruna = () => {
             </DropdownMenuContent>
           </DropdownMenu>
           <input name="gender" type="hidden" value={selectedGender} />
+          <span className="text-red-500">{state?.error.gender}</span>
         </div>
-
         {/* Birth */}
         <div className="flex flex-col gap-2">
           <Label>Birth</Label>
@@ -134,8 +144,8 @@ const CreateFormTeruna = () => {
             type="hidden"
             value={date ? date.toLocaleDateString() : ""}
           />
+          <span className="text-red-500">{state?.error.birth}</span>
         </div>
-
         {/* Sektor */}
         <div className="flex flex-col gap-2">
           <Label>Sektor</Label>
@@ -171,11 +181,11 @@ const CreateFormTeruna = () => {
             </DropdownMenuContent>
           </DropdownMenu>
           <input name="sektor" type="hidden" value={selectedSektor} />
+          <span className="text-red-500">{state?.error.sektor}</span>
         </div>
-
-        <Button type="submit">
-          Save
-        </Button>
+        <Button type="submit" disabled={isPending}>
+          {isPending ? "Saving..." : "Save"}
+        </Button>{" "}
       </div>
     </form>
   );

@@ -21,3 +21,10 @@ export const formatDate = (dateStr: string) => {
 
   return formatter.format(date);
 };
+
+export const formatGender = (gender: string) => {
+  if (gender === "Lakilaki") {
+    return gender.slice(0, 4) + "-" + gender.slice(4);
+  }
+  return gender;
+};

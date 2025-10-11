@@ -1,7 +1,7 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import { PengurusSchema } from "./zod";
+import { PengurusSchema, TerunaSchema } from "./zod";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 
@@ -38,6 +38,38 @@ export const SavePengurus = async (prevState: unknown, formData: FormData) => {
   }
 
   redirect("/dashboard/pengurus");
+};
+
+export const SaveTeruna = async (prevState: unknown, formData: FormData) => {
+  const rawData = {
+    name: formData.get("name"),
+    phone: formData.get("phone"),
+    gender: formData.get("gender"),
+    birth: formData.get("birth"),
+    sektor: formData.get("sektor"),
+  };
+
+  const validatedFields = TerunaSchema.safeParse(rawData);
+  if (!validatedFields.success)
+    return { error: validatedFields.error.flatten().fieldErrors };
+
+  const { name, phone, gender, birth, sektor } = validatedFields.data;
+
+  try {
+    await prisma.teruna.create({
+      data: {
+        name,
+        phone,
+        gender,
+        birth,
+        sektor,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+
+  redirect("/dashboard/teruna");
 };
 
 // Delete

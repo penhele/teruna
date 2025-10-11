@@ -8,3 +8,12 @@ export const getPengurus = async () => {
     console.log(error);
   }
 };
+
+export const getTeruna = async () => {
+  try {
+    const result = await prisma.teruna.findMany();
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+};

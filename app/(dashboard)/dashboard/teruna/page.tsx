@@ -1,6 +1,6 @@
-import { Button } from '@/components/ui/button'
-import Link from 'next/link'
-import React from 'react'
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import React from "react";
 
 const page = () => {
   return (
@@ -9,7 +9,7 @@ const page = () => {
         <Button>Add New</Button>
       </Link>
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;

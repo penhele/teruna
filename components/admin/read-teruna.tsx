@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/table";
 import { formatDate, formatGender, formatSektor } from "@/lib/utils";
 import { DeleteButton, UpdateButton } from "@/components/admin/button";
+import { DeleteTerunaWithId } from "@/lib/action";
 
 const ReadTeruna = async () => {
   const terunaList = await getTeruna();
@@ -38,7 +39,7 @@ const ReadTeruna = async () => {
               <TableCell>
                 <div className="flex gap-1">
                   <UpdateButton id={item.id} />
-                  <DeleteButton id={item.id} />
+                  <DeleteButton id={item.id} action={DeleteTerunaWithId} />
                 </div>
               </TableCell>
             </TableRow>

@@ -1,5 +1,4 @@
 import React from "react";
-import { Separator } from "../ui/separator";
 import {
   Table,
   TableBody,
@@ -10,6 +9,8 @@ import {
 } from "../ui/table";
 import { getJadwalIbadah } from "@/lib/data";
 import { formatDate } from "@/lib/utils";
+import { DeleteButton } from "./button";
+import { DeleteJadwalIbadahWithId } from "@/lib/action";
 
 const ReadJadwalIbadah = async () => {
   const jadwalIbadahList = await getJadwalIbadah();
@@ -23,21 +24,27 @@ const ReadJadwalIbadah = async () => {
         <TableHeader>
           <TableRow>
             <TableHead>Tempat</TableHead>
+            <TableHead>Date</TableHead>
             <TableHead>EKA</TableHead>
             <TableHead>DWI</TableHead>
             <TableHead>Waktu</TableHead>
             <TableHead>Updated At</TableHead>
+            <TableHead>Action</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {jadwalIbadahList.map((item) => (
             <TableRow key={item.id}>
               <TableCell>{item.place}</TableCell>
+              <TableCell>{formatDate(item.date)}</TableCell>
               <TableCell>{item.eka?.name}</TableCell>
               <TableCell>{item.dwi?.name}</TableCell>
               <TableCell>{item.time} WIB</TableCell>
               <TableCell>
-                {formatDate(item.updatedAt.toLocaleDateString())}
+                {formatDate(item.createdAt.toLocaleDateString())}
+              </TableCell>
+              <TableCell>
+                <DeleteButton id={item.id} action={DeleteJadwalIbadahWithId} />
               </TableCell>
             </TableRow>
           ))}

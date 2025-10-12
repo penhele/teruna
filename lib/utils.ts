@@ -14,7 +14,25 @@ export const formatSektor = (sektor: string) => {
 };
 
 export const formatDate = (dateStr: string) => {
-  const date = new Date(dateStr);
+  if (!dateStr) return "";
+
+  let date: Date;
+
+  if (dateStr.includes("-")) {
+    // format "yyyy-mm-dd"
+    const [year, month, day] = dateStr.split("-").map(Number);
+    date = new Date(year, month - 1, day);
+  } else if (dateStr.includes("/")) {
+    // format "dd/mm/yyyy"
+    const [day, month, year] = dateStr.split("/").map(Number);
+    date = new Date(year, month - 1, day);
+  } else {
+    // fallback: biarkan JS parse sendiri
+    date = new Date(dateStr);
+  }
+
+  if (Number.isNaN(date.getTime())) return "";
+
   const formatter = new Intl.DateTimeFormat("id-ID", {
     dateStyle: "medium",
   });

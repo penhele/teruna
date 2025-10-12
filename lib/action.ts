@@ -37,7 +37,7 @@ export const SavePengurus = async (prevState: unknown, formData: FormData) => {
     console.log(error);
   }
 
-  redirect("/dashboard/pengurus");
+  redirect("/dashboard/pelayan");
 };
 
 export const SaveTeruna = async (prevState: unknown, formData: FormData) => {
@@ -117,5 +117,29 @@ export const DeletePengurus = async (id: string) => {
     console.log();
   }
 
-  revalidatePath("/admin/pengurus");
+  revalidatePath("/admin/pelayan");
+};
+
+export const DeleteJadwalIbadahWithId = async (id: string) => {
+  try {
+    await prisma.jadwalIbadah.delete({
+      where: { id },
+    });
+  } catch (error) {
+    console.log();
+  }
+
+  revalidatePath("/admin/jadwal-ibadah");
+};
+
+export const DeleteTerunaWithId = async (id: string) => {
+  try {
+    await prisma.teruna.delete({
+      where: { id },
+    });
+  } catch (error) {
+    console.log();
+  }
+
+  revalidatePath("/admin/jadwal-ibadah");
 };

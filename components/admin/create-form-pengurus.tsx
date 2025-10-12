@@ -78,7 +78,11 @@ const CreateFormPengurus = () => {
                     "text-gray-500": !date,
                   })}
                 >
-                  {date ? date.toLocaleDateString() : "Select date"}
+                  {date
+                    ? date.toLocaleDateString("en-CA", {
+                        timeZone: "Asia/Jakarta",
+                      })
+                    : "Select date"}
                 </span>
                 <span
                   className={`transition-transform duration-200 ${
@@ -107,7 +111,11 @@ const CreateFormPengurus = () => {
           <input
             name="birth"
             type="hidden"
-            value={date ? date.toLocaleDateString() : ""}
+            value={
+              date
+                ? date.toLocaleDateString("en-CA", { timeZone: "Asia/Jakarta" })
+                : ""
+            }
           />
           <span className="text-red-500">{state?.error.birth}</span>
         </div>
@@ -123,7 +131,7 @@ const CreateFormPengurus = () => {
                     "text-gray-500": !selectedCategory,
                   })}
                 >
-                  {selectedCategory || "Select Sektor"}
+                  {selectedCategory || "Select Category"}
                 </span>
                 <span
                   className={`transition-transform duration-200 ${

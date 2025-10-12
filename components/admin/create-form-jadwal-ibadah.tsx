@@ -48,7 +48,13 @@ const CreateFormJadwalIbadah = () => {
         {/* Tempat Ibadah */}
         <div className="flex flex-col gap-2">
           <Label>Tempat Ibadah</Label>
-          <Input name="place" placeholder="Ruang Serbaguna" />
+          <Input
+            name="place"
+            placeholder="Ruang Serbaguna"
+            value={"Ruang Serbaguna"}
+            readOnly
+          />
+          <span className="text-red-500">{state?.error.place}</span>
         </div>
 
         <div className="flex gap-3">
@@ -68,6 +74,7 @@ const CreateFormJadwalIbadah = () => {
               </SelectContent>
             </Select>
             <input type="hidden" name="ekaId" value={ekaId} />
+            <span className="text-red-500">{state?.error.ekaId}</span>
           </div>
 
           {/* Pelayan Firman (DWI) */}
@@ -86,6 +93,7 @@ const CreateFormJadwalIbadah = () => {
               </SelectContent>
             </Select>
             <input type="hidden" name="dwiId" value={dwiId} />
+            <span className="text-red-500">{state?.error.dwiId}</span>
           </div>
         </div>
 
@@ -129,17 +137,25 @@ const CreateFormJadwalIbadah = () => {
           <input
             name="date"
             type="hidden"
-            value={date ? date.toLocaleDateString() : ""}
+            value={
+              date
+                ? date.toLocaleDateString("en-CA", { timeZone: "Asia/Jakarta" })
+                : ""
+            }
           />
+          <span className="text-red-500">{state?.error.date}</span>
         </div>
 
         {/* Waktu */}
         <div className="flex flex-col gap-2">
           <Label>Time</Label>
-          <Input type="time" name="time" />
+          <Input type="time" name="time" value={"09:00"} readOnly />
+          <span className="text-red-500">{state?.error.time}</span>
         </div>
 
-        <Button>Save</Button>
+        <Button type="submit" disabled={isPending}>
+          {isPending ? "Saving..." : "Save"}
+        </Button>
       </div>
     </form>
   );

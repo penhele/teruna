@@ -94,18 +94,10 @@ export const JadwalIbadahSchema = object({
     }),
 
   // 2️⃣ Pelayan Firman (EKA)
-  ekaId: string()
-    .min(1, "Pelayan Firman (EKA) wajib dipilih.")
-    .refine((val) => val.trim().length > 0, {
-      message: "Pelayan Firman (EKA) wajib diisi.",
-    }),
+  ekaId: string().min(1, "Pelayan Firman (EKA) wajib dipilih."),
 
   // 3️⃣ Pelayan Firman (DWI)
-  dwiId: string()
-    .min(1, "Pelayan Firman (DWI) wajib dipilih.")
-    .refine((val) => val.trim().length > 0, {
-      message: "Pelayan Firman (DWI) wajib diisi.",
-    }),
+  dwiId: string().min(1, "Pelayan Firman (DWI) wajib dipilih."),
 
   // 4️⃣ Tanggal Ibadah
   date: string()

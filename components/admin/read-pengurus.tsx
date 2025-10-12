@@ -9,6 +9,7 @@ import {
 import { getPengurus } from "@/lib/data";
 import { formatDate, formatSektor } from "@/lib/utils";
 import { DeleteButton, UpdateButton } from "./button";
+import { DeletePengurus } from "@/lib/action";
 
 const ReadPengurus = async () => {
   const pengurusList = await getPengurus();
@@ -39,7 +40,7 @@ const ReadPengurus = async () => {
             <TableCell>
               <div className="flex gap-1">
                 <UpdateButton id={item.id} />
-                <DeleteButton id={item.id} />
+                <DeleteButton id={item.id} action={DeletePengurus} />
               </div>
             </TableCell>
           </TableRow>

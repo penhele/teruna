@@ -10,13 +10,18 @@ import {
 } from "@/components/ui/sidebar";
 import { GrGroup } from "react-icons/gr";
 import { RiHome6Line } from "react-icons/ri";
-import { PiFinnTheHuman } from "react-icons/pi";
+import { PiChurch, PiFinnTheHuman } from "react-icons/pi";
 
 const items = [
   {
     title: "Home",
     url: "/dashboard",
     icon: RiHome6Line,
+  },
+  {
+    title: "Jadwal Ibadah",
+    url: "/dashboard/jadwal-ibadah",
+    icon: PiChurch,
   },
   {
     title: "Pelayan",

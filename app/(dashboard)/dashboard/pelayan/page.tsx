@@ -6,7 +6,7 @@ import ReadPengurus from "@/components/admin/read-pengurus";
 const PengurusPage = () => {
   return (
     <div className="">
-      <Link href={"/dashboard/pengurus/create"}>
+      <Link href={"/dashboard/pelayan/create"}>
         <Button>Add New</Button>
       </Link>
 

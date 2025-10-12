@@ -17,3 +17,20 @@ export const getTeruna = async () => {
     console.log(error);
   }
 };
+
+export const getJadwalIbadah = async () => {
+  try {
+    const result = await prisma.jadwalIbadah.findMany({
+      include: {
+        eka: true,
+        dwi: true,
+      },
+      orderBy: {
+        updatedAt: "desc",
+      },
+    });
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+};

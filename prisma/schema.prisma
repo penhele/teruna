@@ -58,6 +58,9 @@ model Pengurus {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  ekaJadwalIbadah JadwalIbadah[] @relation("EkaRelation")
+  dwiJadwalIbadah JadwalIbadah[] @relation("DwiRelation")
 }
 
 model Teruna {
@@ -67,6 +70,21 @@ model Teruna {
   birth  String
   gender Gender
   sektor Sektor
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model JadwalIbadah {
+  id    String @id @default(cuid())
+  place String
+  date  String
+  time  String
+
+  ekaId String?
+  dwiId String?
+  eka   Pengurus? @relation("EkaRelation", fields: [ekaId], references: [id])
+  dwi   Pengurus? @relation("DwiRelation", fields: [dwiId], references: [id])
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

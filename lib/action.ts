@@ -1,7 +1,7 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import { PengurusSchema, TerunaSchema } from "./zod";
+import { JadwalIbadahSchema, PengurusSchema, TerunaSchema } from "./zod";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 
@@ -70,6 +70,41 @@ export const SaveTeruna = async (prevState: unknown, formData: FormData) => {
   }
 
   redirect("/dashboard/teruna");
+};
+
+export const SaveJadwalIbadah = async (
+  prevState: unknown,
+  formData: FormData,
+) => {
+  const rawData = {
+    place: formData.get("place"),
+    ekaId: formData.get("ekaId"),
+    dwiId: formData.get("dwiId"),
+    date: formData.get("date"),
+    time: formData.get("time"),
+  };
+
+  const validatedFields = JadwalIbadahSchema.safeParse(rawData);
+  if (!validatedFields.success)
+    return { error: validatedFields.error.flatten().fieldErrors };
+
+  const { place, ekaId, dwiId, date, time } = validatedFields.data;
+
+  try {
+    await prisma.jadwalIbadah.create({
+      data: {
+        place,
+        ekaId,
+        dwiId,
+        date,
+        time,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+
+  redirect("/dashboard/jadwal-ibadah");
 };
 
 // Delete

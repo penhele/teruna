@@ -1,0 +1,148 @@
+"use client";
+
+import React, { useActionState, useEffect, useState } from "react";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Button } from "@/components/ui/button";
+import { ChevronRight } from "lucide-react";
+import { Calendar } from "@/components/ui/calendar";
+import clsx from "clsx";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { SaveJadwalIbadah } from "@/lib/action";
+
+const CreateFormJadwalIbadah = () => {
+  const [openCalendar, setOpenCalendar] = useState(false);
+  const [date, setDate] = useState<Date | undefined>(undefined);
+  const [pengurusList, setPengurusList] = useState<
+    { id: string; name: string }[]
+  >([]);
+  const [ekaId, setEkaId] = useState("");
+  const [dwiId, setDwiId] = useState("");
+
+  useEffect(() => {
+    fetch("/api/pengurus")
+      .then((res) => res.json())
+      .then((data) => setPengurusList(data))
+      .catch((err) => console.error(err));
+  }, []);
+
+  const [state, formAction, isPending] = useActionState(
+    SaveJadwalIbadah.bind(null),
+    null,
+  );
+
+  return (
+    <form action={formAction}>
+      <div className="flex flex-col gap-3">
+        {/* Tempat Ibadah */}
+        <div className="flex flex-col gap-2">
+          <Label>Tempat Ibadah</Label>
+          <Input name="place" placeholder="Ruang Serbaguna" />
+        </div>
+
+        <div className="flex gap-3">
+          {/* Pelayan Firman (EKA) */}
+          <div className="flex flex-col gap-2 w-full">
+            <Label>Pelayan Firman (EKA)</Label>
+            <Select onValueChange={setEkaId}>
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="EKA" />
+              </SelectTrigger>
+              <SelectContent>
+                {pengurusList.map((item) => (
+                  <SelectItem key={item.id} value={item.id}>
+                    {item.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <input type="hidden" name="ekaId" value={ekaId} />
+          </div>
+
+          {/* Pelayan Firman (DWI) */}
+          <div className="flex flex-col gap-2 w-full">
+            <Label>Pelayan Firman (DWI)</Label>
+            <Select onValueChange={setDwiId}>
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="DWI" />
+              </SelectTrigger>
+              <SelectContent>
+                {pengurusList.map((item) => (
+                  <SelectItem key={item.id} value={item.id}>
+                    {item.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <input type="hidden" name="dwiId" value={dwiId} />
+          </div>
+        </div>
+
+        {/* Date */}
+        <div className="flex flex-col gap-2">
+          <Label>Date</Label>
+          <Popover open={openCalendar} onOpenChange={setOpenCalendar}>
+            <PopoverTrigger asChild>
+              <Button variant={"outline"} className="flex justify-between">
+                <span
+                  className={clsx("font-normal", {
+                    "text-gray-500": !date,
+                  })}
+                >
+                  {date ? date.toLocaleDateString() : "Select date"}
+                </span>
+                <span
+                  className={`transition-transform duration-200 ${
+                    openCalendar ? "rotate-90" : "rotate-0"
+                  }`}
+                >
+                  <ChevronRight className="h-4 w-4" />
+                </span>
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent
+              className="w-auto overflow-hidden p-0"
+              align="start"
+            >
+              <Calendar
+                mode="single"
+                selected={date}
+                captionLayout="dropdown"
+                onSelect={(date) => {
+                  setDate(date);
+                  setOpenCalendar(false);
+                }}
+              />
+            </PopoverContent>
+          </Popover>
+          <input
+            name="date"
+            type="hidden"
+            value={date ? date.toLocaleDateString() : ""}
+          />
+        </div>
+
+        {/* Waktu */}
+        <div className="flex flex-col gap-2">
+          <Label>Time</Label>
+          <Input type="time" name="time" />
+        </div>
+
+        <Button>Save</Button>
+      </div>
+    </form>
+  );
+};
+
+export default CreateFormJadwalIbadah;

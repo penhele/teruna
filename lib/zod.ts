@@ -84,3 +84,43 @@ export const TerunaSchema = object({
     },
   ),
 });
+
+export const JadwalIbadahSchema = object({
+  // 1️⃣ Tempat Ibadah
+  place: string()
+    .min(3, "Tempat ibadah harus memiliki minimal 3 karakter.")
+    .refine((val) => val.trim().length > 0, {
+      message: "Tempat ibadah wajib diisi.",
+    }),
+
+  // 2️⃣ Pelayan Firman (EKA)
+  ekaId: string()
+    .min(1, "Pelayan Firman (EKA) wajib dipilih.")
+    .refine((val) => val.trim().length > 0, {
+      message: "Pelayan Firman (EKA) wajib diisi.",
+    }),
+
+  // 3️⃣ Pelayan Firman (DWI)
+  dwiId: string()
+    .min(1, "Pelayan Firman (DWI) wajib dipilih.")
+    .refine((val) => val.trim().length > 0, {
+      message: "Pelayan Firman (DWI) wajib diisi.",
+    }),
+
+  // 4️⃣ Tanggal Ibadah
+  date: string()
+    .min(1, "Tanggal ibadah wajib diisi.")
+    .refine((val) => val.trim().length > 0, {
+      message: "Tanggal ibadah tidak boleh kosong.",
+    }),
+
+  // 5️⃣ Waktu Ibadah
+  time: string()
+    .regex(
+      /^([0-1]\d|2[0-3]):([0-5]\d)$/,
+      "Format waktu tidak valid (gunakan HH:mm).",
+    )
+    .refine((val) => val.trim().length > 0, {
+      message: "Waktu ibadah wajib diisi.",
+    }),
+});

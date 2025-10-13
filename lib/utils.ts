@@ -13,7 +13,10 @@ export const formatSektor = (sektor: string) => {
     .replace(/\b\w/g, (char) => char.toUpperCase());
 };
 
-export const formatDate = (dateStr: string) => {
+export const formatDate = (
+  dateStr: string,
+  dateStyle: "full" | "long" | "medium" | "short" = "medium",
+): string => {
   if (!dateStr) return "";
 
   let date: Date;
@@ -27,17 +30,13 @@ export const formatDate = (dateStr: string) => {
     const [day, month, year] = dateStr.split("/").map(Number);
     date = new Date(year, month - 1, day);
   } else {
-    // fallback: biarkan JS parse sendiri
+    // fallback: biarkan JS parse
     date = new Date(dateStr);
   }
 
-  if (Number.isNaN(date.getTime())) return "";
+  if (isNaN(date.getTime())) return "";
 
-  const formatter = new Intl.DateTimeFormat("id-ID", {
-    dateStyle: "medium",
-  });
-
-  return formatter.format(date);
+  return new Intl.DateTimeFormat("id-ID", { dateStyle }).format(date);
 };
 
 export const formatGender = (gender: string) => {

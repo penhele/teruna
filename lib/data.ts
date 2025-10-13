@@ -5,7 +5,8 @@ export const getPengurus = async () => {
     const result = await prisma.pengurus.findMany();
     return result;
   } catch (error) {
-    console.log(error);
+    console.error("Error fetching pengurus:", error);
+    return [];
   }
 };
 
@@ -14,7 +15,8 @@ export const getTeruna = async () => {
     const result = await prisma.teruna.findMany();
     return result;
   } catch (error) {
-    console.log(error);
+    console.error("Error fetching teruna:", error);
+    return [];
   }
 };
 
@@ -32,5 +34,24 @@ export const getJadwalIbadah = async () => {
     return result;
   } catch (error) {
     console.log(error);
+    return [];
+  }
+};
+
+export const getLatestJadwalIbadah = async () => {
+  try {
+    const result = await prisma.jadwalIbadah.findFirst({
+      include: {
+        eka: true,
+        dwi: true,
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+    return result;
+  } catch (error) {
+    console.error("Error fetching latest jadwal ibadah:", error);
+    return null;
   }
 };

@@ -49,6 +49,22 @@ export const getJadwalIbadah = async () => {
   }
 };
 
+export const getJadwalIbadahById = async (jadwalIbadahId: string) => {
+  try {
+    const result = await prisma.jadwalIbadah.findUnique({
+      where: { id: jadwalIbadahId },
+      include: {
+        eka: true,
+        dwi: true,
+      },
+    });
+    return result;
+  } catch (error) {
+    console.error("Error fetching jadwal ibadah by id:", error);
+    return null;
+  }
+};
+
 export const getLatestJadwalIbadah = async () => {
   try {
     const result = await prisma.jadwalIbadah.findFirst({

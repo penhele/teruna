@@ -185,3 +185,41 @@ export const UpdatePelayan = async (
   revalidatePath("/dashboard/pelayan");
   redirect("/dashboard/pelayan");
 };
+
+export const UpdateJadwalIbadah = async (
+  jadwalibadahId: string,
+  prevState: unknown,
+  formData: FormData,
+) => {
+  const rawData = {
+    place: formData.get("place"),
+    ekaId: formData.get("ekaId"),
+    dwiId: formData.get("dwiId"),
+    date: formData.get("date"),
+    time: formData.get("time"),
+  };
+
+  const validatedFields = JadwalIbadahSchema.safeParse(rawData);
+  if (!validatedFields.success)
+    return { error: validatedFields.error.flatten().fieldErrors };
+
+  const { place, ekaId, dwiId, date, time } = validatedFields.data;
+
+  try {
+    await prisma.jadwalIbadah.update({
+      where: { id: jadwalibadahId },
+      data: {
+        place,
+        ekaId,
+        dwiId,
+        date,
+        time,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+
+  revalidatePath("/dashboard/jadwal-ibadah");
+  redirect("/dashboard/jadwal-ibadah");
+};

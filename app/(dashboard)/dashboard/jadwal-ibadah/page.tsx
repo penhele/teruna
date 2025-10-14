@@ -1,6 +1,11 @@
 import ReadJadwalIbadah from "@/components/admin/read-jadwal-ibadah";
 import { Button } from "@/components/ui/button";
+import { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Jadwal Ibadah",
+};
 
 const JadwalIbadahPage = () => {
   return (

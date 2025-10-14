@@ -69,6 +69,17 @@ const EditFormPelayan = ({ pelayan }: { pelayan: PelayanProps }) => {
           <span className="text-red-500">{state?.error.name}</span>
         </div>
 
+        {/* Nickname */}
+        <div className="flex flex-col gap-2">
+          <Label>Nickname</Label>
+          <Input
+            name="nickname"
+            defaultValue={pelayan.nickname ?? ""}
+            placeholder="Pen"
+          />
+          <span className="text-red-500">{state?.error.nickname}</span>
+        </div>
+
         {/* Phone */}
         <div className="flex flex-col gap-2">
           <Label>Phone</Label>

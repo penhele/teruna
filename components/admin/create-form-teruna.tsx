@@ -12,7 +12,7 @@ import {
 import { Button } from "@/components/ui/button";
 import clsx from "clsx";
 import { ChevronRight } from "lucide-react";
-import { formatSektor } from "@/lib/utils";
+import { formatGender, formatSektor } from "@/lib/utils";
 import {
   Popover,
   PopoverContent,
@@ -76,7 +76,7 @@ const CreateFormTeruna = () => {
                     "text-gray-500": !selectedGender,
                   })}
                 >
-                  {selectedGender || "Select Gender"}
+                  {formatGender(selectedGender) || "Select Gender"}
                 </span>
                 <span
                   className={`transition-transform duration-200 ${
@@ -94,7 +94,7 @@ const CreateFormTeruna = () => {
                   key={index}
                   onClick={() => setSelectedGender(item)}
                 >
-                  {item}
+                  {formatGender(item)}
                 </DropdownMenuItem>
               ))}
             </DropdownMenuContent>

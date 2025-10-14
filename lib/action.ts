@@ -1,13 +1,14 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import { JadwalIbadahSchema, PengurusSchema, TerunaSchema } from "./zod";
+import { JadwalIbadahSchema, PelayanSchema, TerunaSchema } from "./zod";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 
 export const SavePelayan = async (prevState: unknown, formData: FormData) => {
   const rawData = {
     name: formData.get("name"),
+    nickname: formData.get("nickname"),
     phone: formData.get("phone")?.toString() || "",
     birth: formData.get("birth"),
     category: formData.get("category"),
@@ -15,17 +16,18 @@ export const SavePelayan = async (prevState: unknown, formData: FormData) => {
     sektor: formData.get("sektor"),
   };
 
-  const validatedFields = PengurusSchema.safeParse(rawData);
+  const validatedFields = PelayanSchema.safeParse(rawData);
   if (!validatedFields.success)
     return { error: validatedFields.error.flatten().fieldErrors };
 
-  const { name, phone, birth, category, position, sektor } =
+  const { name, nickname, phone, birth, category, position, sektor } =
     validatedFields.data;
 
   try {
     await prisma.pelayan.create({
       data: {
         name,
+        nickname,
         phone,
         birth,
         category,
@@ -152,6 +154,7 @@ export const UpdatePelayan = async (
 ) => {
   const rawData = {
     name: formData.get("name"),
+    nickname: formData.get("nickname"),
     phone: formData.get("phone")?.toString() || "",
     birth: formData.get("birth"),
     category: formData.get("category"),
@@ -159,11 +162,11 @@ export const UpdatePelayan = async (
     sektor: formData.get("sektor"),
   };
 
-  const validatedFields = PengurusSchema.safeParse(rawData);
+  const validatedFields = PelayanSchema.safeParse(rawData);
   if (!validatedFields.success)
     return { error: validatedFields.error.flatten().fieldErrors };
 
-  const { name, phone, birth, category, position, sektor } =
+  const { name, nickname, phone, birth, category, position, sektor } =
     validatedFields.data;
 
   try {
@@ -171,6 +174,7 @@ export const UpdatePelayan = async (
       where: { id: pelayanId },
       data: {
         name,
+        nickname,
         phone,
         birth,
         category,

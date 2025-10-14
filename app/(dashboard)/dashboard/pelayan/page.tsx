@@ -2,8 +2,13 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import ReadPengurus from "@/components/admin/read-pengurus";
+import { Metadata } from "next";
 
-const PengurusPage = () => {
+export const metadata: Metadata = {
+  title: "Pelayan",
+};
+
+const PelayanPage = () => {
   return (
     <div className="">
       <Link href={"/dashboard/pelayan/create"}>
@@ -15,4 +20,4 @@ const PengurusPage = () => {
   );
 };
 
-export default PengurusPage;
+export default PelayanPage;

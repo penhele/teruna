@@ -17,7 +17,7 @@ const DashboardPage = async () => {
   return (
     <div className="flex flex-col gap-3 bg-gray-100 shadow-lg p-4 rounded-sm">
       <div className="flex flex-col gap-1">
-        <h1 className="text-xl font-medium">Dashboard</h1>
+        <h1 className="text-lg font-medium">Dashboard</h1>
         <p className="text-sm">
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quasi at
           similique fuga consequuntur, tempora dolorem.
@@ -41,8 +41,8 @@ const DashboardPage = async () => {
               <TableBody>
                 <TableRow>
                   <TableCell>{jadwalIbadah?.place}</TableCell>
-                  <TableCell>{jadwalIbadah?.eka?.name}</TableCell>
-                  <TableCell>{jadwalIbadah?.dwi?.name}</TableCell>
+                  <TableCell>Kak {jadwalIbadah?.eka?.nickname}</TableCell>
+                  <TableCell>Kak {jadwalIbadah?.dwi?.nickname}</TableCell>
                   <TableCell>{jadwalIbadah?.time}</TableCell>
                 </TableRow>
               </TableBody>

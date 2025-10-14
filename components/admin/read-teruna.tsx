@@ -7,7 +7,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { formatDate, formatGender, formatSektor } from "@/lib/utils";
+import { formatAge, formatDate, formatGender, formatSektor } from "@/lib/utils";
 import { DeleteButton, UpdateButton } from "@/components/admin/button";
 import { DeleteTerunaWithId } from "@/lib/action";
 
@@ -24,6 +24,7 @@ const ReadTeruna = async () => {
             <TableHead>Phone</TableHead>
             <TableHead>Gender</TableHead>
             <TableHead>Birth</TableHead>
+            <TableHead>Age</TableHead>
             <TableHead>Sektor</TableHead>
             <TableHead>Action</TableHead>
           </TableRow>
@@ -35,6 +36,7 @@ const ReadTeruna = async () => {
               <TableCell>{item.phone}</TableCell>
               <TableCell>{formatGender(item.gender)}</TableCell>
               <TableCell>{formatDate(item.birth)}</TableCell>
+              <TableCell>{formatAge(item.birth)}</TableCell>
               <TableCell>{formatSektor(item.sektor)}</TableCell>
               <TableCell>
                 <div className="flex gap-1">

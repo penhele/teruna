@@ -37,15 +37,20 @@ const ReadJadwalIbadah = async () => {
             <TableRow key={item.id}>
               <TableCell>{item.place}</TableCell>
               <TableCell>{formatDate(item.date)}</TableCell>
-              <TableCell>{item.eka?.name}</TableCell>
-              <TableCell>{item.dwi?.name}</TableCell>
+              <TableCell>Kak {item.eka?.nickname}</TableCell>
+              <TableCell>Kak {item.dwi?.nickname}</TableCell>
               <TableCell>{item.time} WIB</TableCell>
               <TableCell>
                 {formatDate(item.createdAt.toLocaleDateString())}
               </TableCell>
               <TableCell>
-                <UpdateButton id={item.id} path="jadwal-ibadah" />
-                <DeleteButton id={item.id} action={DeleteJadwalIbadahWithId} />
+                <div className="flex gap-1">
+                  <UpdateButton id={item.id} path="jadwal-ibadah" />
+                  <DeleteButton
+                    id={item.id}
+                    action={DeleteJadwalIbadahWithId}
+                  />
+                </div>
               </TableCell>
             </TableRow>
           ))}

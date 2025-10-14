@@ -23,7 +23,7 @@ export const SavePelayan = async (prevState: unknown, formData: FormData) => {
     validatedFields.data;
 
   try {
-    await prisma.pengurus.create({
+    await prisma.pelayan.create({
       data: {
         name,
         phone,
@@ -110,7 +110,7 @@ export const SaveJadwalIbadah = async (
 // Delete
 export const DeletePengurus = async (id: string) => {
   try {
-    await prisma.pengurus.delete({
+    await prisma.pelayan.delete({
       where: { id },
     });
   } catch (error) {
@@ -167,7 +167,7 @@ export const UpdatePelayan = async (
     validatedFields.data;
 
   try {
-    await prisma.pengurus.update({
+    await prisma.pelayan.update({
       where: { id: pelayanId },
       data: {
         name,

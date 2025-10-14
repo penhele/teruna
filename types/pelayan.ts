@@ -1,3 +1,3 @@
 import { Prisma } from "@prisma/client";
 
-export type PelayanProps = Prisma.PengurusGetPayload<{}>;
+export type PelayanProps = Prisma.PelayanGetPayload<{}>;

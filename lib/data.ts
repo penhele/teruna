@@ -2,7 +2,7 @@ import { prisma } from "@/lib/prisma";
 
 export const getPelayan = async () => {
   try {
-    const result = await prisma.pengurus.findMany();
+    const result = await prisma.pelayan.findMany();
     return result;
   } catch (error) {
     console.error("Error fetching pelayan:", error);
@@ -12,7 +12,7 @@ export const getPelayan = async () => {
 
 export const getPelayanById = async (pelayanId: string) => {
   try {
-    const result = await prisma.pengurus.findUnique({
+    const result = await prisma.pelayan.findUnique({
       where: { id: pelayanId },
     });
     return result;

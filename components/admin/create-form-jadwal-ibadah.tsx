@@ -24,7 +24,7 @@ import { SaveJadwalIbadah } from "@/lib/action";
 const CreateFormJadwalIbadah = () => {
   const [openCalendar, setOpenCalendar] = useState(false);
   const [date, setDate] = useState<Date | undefined>(undefined);
-  const [pengurusList, setPengurusList] = useState<
+  const [pengurusList, setPelayanList] = useState<
     { id: string; name: string }[]
   >([]);
   const [ekaId, setEkaId] = useState("");
@@ -33,7 +33,7 @@ const CreateFormJadwalIbadah = () => {
   useEffect(() => {
     fetch("/api/pengurus")
       .then((res) => res.json())
-      .then((data) => setPengurusList(data))
+      .then((data) => setPelayanList(data))
       .catch((err) => console.error(err));
   }, []);
 

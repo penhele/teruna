@@ -30,7 +30,7 @@ const DashboardPage = async () => {
       </div>
 
       <div className="grid grid-cols-4 gap-3">
-        <div className="p-4 col-span-2 bg-white rounded-sm shadow-lg">
+        <div className="p-4 col-span-2 bg-white rounded-sm shadow-sm">
           <p>{formatDate(jadwalIbadah?.date ?? "", "full")}</p>
 
           <div className="">
@@ -54,11 +54,11 @@ const DashboardPage = async () => {
             </Table>
           </div>
         </div>
-        <div className="flex flex-col items-center justify-center bg-white rounded-sm shadow-lg">
+        <div className="flex flex-col items-center justify-center bg-white rounded-sm shadow-sm">
           <p>Total Pelayan</p>
           <p className="text-2xl font-semibold">{pengurusList.length}</p>
         </div>
-        <div className="flex flex-col items-center justify-center bg-white rounded-sm shadow-lg">
+        <div className="flex flex-col items-center justify-center bg-white rounded-sm shadow-sm">
           <p>Total Teruna</p>
           <p className="text-2xl font-semibold">{terunaList.length}</p>
         </div>

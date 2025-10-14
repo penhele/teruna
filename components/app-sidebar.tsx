@@ -12,6 +12,7 @@ import {
 import { GrGroup } from "react-icons/gr";
 import { RiHome6Line } from "react-icons/ri";
 import { PiChurch, PiFinnTheHuman } from "react-icons/pi";
+import { IoIosLogOut } from "react-icons/io";
 import Link from "next/link";
 
 const items = [
@@ -63,7 +64,10 @@ export function AppSidebar() {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
-              <Link href={"/"}>Sign Out</Link>
+              <Link href={"/"}>
+                <IoIosLogOut />
+                Sign Out
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>

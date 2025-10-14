@@ -9,7 +9,7 @@ import {
 } from "../ui/table";
 import { getJadwalIbadah } from "@/lib/data";
 import { formatDate } from "@/lib/utils";
-import { DeleteButton } from "./button";
+import { DeleteButton, UpdateButton } from "./button";
 import { DeleteJadwalIbadahWithId } from "@/lib/action";
 
 const ReadJadwalIbadah = async () => {
@@ -44,6 +44,7 @@ const ReadJadwalIbadah = async () => {
                 {formatDate(item.createdAt.toLocaleDateString())}
               </TableCell>
               <TableCell>
+                <UpdateButton id={item.id} path="jadwal-ibadah" />
                 <DeleteButton id={item.id} action={DeleteJadwalIbadahWithId} />
               </TableCell>
             </TableRow>

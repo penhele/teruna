@@ -1,4 +1,5 @@
 import { DeletePengurus } from "@/lib/action";
+import Link from "next/link";
 import React from "react";
 import { IoPencil, IoPencilOutline, IoTrashOutline } from "react-icons/io5";
 
@@ -22,17 +23,13 @@ export const DeleteButton = ({ id, action }: DeleteButtonProps) => {
   );
 };
 
-export const UpdateButton = ({ id }: { id: string }) => {
-  // const deletePengurusWithId = DeletePengurus.bind(null, id)
-
+export const UpdateButton = ({ id, path }: { id: string; path: string }) => {
   return (
-    <form action="">
-      <button
-        type="submit"
-        className="p-1 hover:bg-gray-200 rounded-sm cursor-pointer"
-      >
-        <IoPencilOutline />
-      </button>
-    </form>
+    <Link
+      href={`/dashboard/${path}/edit/${id}`}
+      className="p-1 hover:bg-gray-200 rounded-sm cursor-pointer"
+    >
+      <IoPencil />
+    </Link>
   );
 };

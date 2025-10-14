@@ -11,6 +11,7 @@ const Navlink = () => {
     { title: "Home", url: "/" },
     { title: "About", url: "/" },
     { title: "Contact", url: "/" },
+    { title: "Dashboard", url: "/dashboard" },
   ];
 
   return (
@@ -18,7 +19,7 @@ const Navlink = () => {
       <NavigationMenuList>
         {navMenu.map((item, index) => (
           <NavigationMenuItem key={index}>
-            <NavigationMenuLink>
+            <NavigationMenuLink asChild>
               <Link href={item.url}>{item.title}</Link>
             </NavigationMenuLink>
           </NavigationMenuItem>

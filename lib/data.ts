@@ -1,12 +1,23 @@
 import { prisma } from "@/lib/prisma";
 
-export const getPengurus = async () => {
+export const getPelayan = async () => {
   try {
     const result = await prisma.pengurus.findMany();
     return result;
   } catch (error) {
-    console.error("Error fetching pengurus:", error);
+    console.error("Error fetching pelayan:", error);
     return [];
+  }
+};
+
+export const getPelayanById = async (pelayanId: string) => {
+  try {
+    const result = await prisma.pengurus.findUnique({
+      where: { id: pelayanId },
+    });
+    return result;
+  } catch (error) {
+    console.error("Error fetching pelayan by id:", error);
   }
 };
 

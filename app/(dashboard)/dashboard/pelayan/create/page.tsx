@@ -1,8 +1,8 @@
-import CreateFormPengurus from "@/components/admin/create-form-pengurus";
+import CreateFormPelayan from "@/components/admin/create-form-pelayan";
 import React from "react";
 
 const CreatePage = () => {
-  return <CreateFormPengurus />;
+  return <CreateFormPelayan />;
 };
 
 export default CreatePage;

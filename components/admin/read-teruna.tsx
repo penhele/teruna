@@ -38,7 +38,7 @@ const ReadTeruna = async () => {
               <TableCell>{formatSektor(item.sektor)}</TableCell>
               <TableCell>
                 <div className="flex gap-1">
-                  <UpdateButton id={item.id} />
+                  <UpdateButton id={item.id} path="teruna" />
                   <DeleteButton id={item.id} action={DeleteTerunaWithId} />
                 </div>
               </TableCell>

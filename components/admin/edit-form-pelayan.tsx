@@ -4,7 +4,7 @@ import React, { useActionState, useEffect, useState } from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { SavePengurus } from "@/lib/action";
+import { SavePelayan, UpdatePelayan } from "@/lib/action";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,16 +20,21 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
+import { PelayanProps } from "@/types/pelayan";
 
-const CreateFormPengurus = () => {
+const EditFormPelayan = ({ pelayan }: { pelayan: PelayanProps }) => {
   const [sektorList, setSektorList] = useState<string[]>([]);
-  const [selectedSektor, setSelectedSektor] = useState<string>("");
+  const [selectedSektor, setSelectedSektor] = useState<string>(pelayan.sektor);
   const [categoryList, setCategoryList] = useState<string[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState<string>("");
+  const [selectedCategory, setSelectedCategory] = useState<string>(
+    pelayan.category,
+  );
   const [openSektor, setOpenSektor] = useState(false);
   const [openCategory, setOpenCategory] = useState(false);
   const [openCalendar, setOpenCalendar] = useState(false);
-  const [date, setDate] = useState<Date | undefined>(undefined);
+  const [date, setDate] = useState<Date | undefined>(
+    pelayan.birth ? new Date(pelayan.birth) : undefined,
+  );
 
   useEffect(() => {
     const fetchEnums = async () => {
@@ -46,7 +51,7 @@ const CreateFormPengurus = () => {
   }, []);
 
   const [state, formAction, isPending] = useActionState(
-    SavePengurus.bind(null),
+    UpdatePelayan.bind(null, pelayan.id),
     null,
   );
 
@@ -56,14 +61,22 @@ const CreateFormPengurus = () => {
         {/* Nama */}
         <div className="flex flex-col gap-2">
           <Label>Name</Label>
-          <Input name="name" placeholder="Stephen" />
+          <Input
+            name="name"
+            defaultValue={pelayan.name}
+            placeholder="Stephen"
+          />
           <span className="text-red-500">{state?.error.name}</span>
         </div>
 
         {/* Phone */}
         <div className="flex flex-col gap-2">
           <Label>Phone</Label>
-          <Input name="phone" placeholder="0818..." />
+          <Input
+            name="phone"
+            defaultValue={pelayan.phone}
+            placeholder="0818..."
+          />
           <span className="text-red-500">{state?.error.phone}</span>
         </div>
 
@@ -163,6 +176,7 @@ const CreateFormPengurus = () => {
           <Label>Position</Label>
           <Input
             name="position"
+            defaultValue={pelayan.position ?? ""}
             placeholder="Ketua"
             readOnly={selectedCategory !== "Pengurus"}
           />
@@ -208,11 +222,11 @@ const CreateFormPengurus = () => {
         </div>
 
         <Button type="submit" disabled={isPending}>
-          {isPending ? "Saving..." : "Save"}
+          {isPending ? "Updating..." : "Update"}
         </Button>
       </div>
     </form>
   );
 };
 
-export default CreateFormPengurus;
+export default EditFormPelayan;

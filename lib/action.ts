@@ -5,7 +5,7 @@ import { JadwalIbadahSchema, PengurusSchema, TerunaSchema } from "./zod";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 
-export const SavePengurus = async (prevState: unknown, formData: FormData) => {
+export const SavePelayan = async (prevState: unknown, formData: FormData) => {
   const rawData = {
     name: formData.get("name"),
     phone: formData.get("phone")?.toString() || "",
@@ -142,4 +142,46 @@ export const DeleteTerunaWithId = async (id: string) => {
   }
 
   revalidatePath("/admin/jadwal-ibadah");
+};
+
+// Update
+export const UpdatePelayan = async (
+  pelayanId: string,
+  prevState: unknown,
+  formData: FormData,
+) => {
+  const rawData = {
+    name: formData.get("name"),
+    phone: formData.get("phone")?.toString() || "",
+    birth: formData.get("birth"),
+    category: formData.get("category"),
+    position: formData.get("position"),
+    sektor: formData.get("sektor"),
+  };
+
+  const validatedFields = PengurusSchema.safeParse(rawData);
+  if (!validatedFields.success)
+    return { error: validatedFields.error.flatten().fieldErrors };
+
+  const { name, phone, birth, category, position, sektor } =
+    validatedFields.data;
+
+  try {
+    await prisma.pengurus.update({
+      where: { id: pelayanId },
+      data: {
+        name,
+        phone,
+        birth,
+        category,
+        position,
+        sektor,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+
+  revalidatePath("/dashboard/pelayan");
+  redirect("/dashboard/pelayan");
 };

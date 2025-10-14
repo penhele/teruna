@@ -6,13 +6,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { getPengurus } from "@/lib/data";
 import { formatDate, formatSektor } from "@/lib/utils";
 import { DeleteButton, UpdateButton } from "./button";
 import { DeletePengurus } from "@/lib/action";
+import { getPelayan } from "@/lib/data";
 
 const ReadPengurus = async () => {
-  const pengurusList = await getPengurus();
+  const pengurusList = await getPelayan();
   if (!pengurusList?.length) return <p>Data tidak ditemukan</p>;
 
   return (
@@ -39,7 +39,7 @@ const ReadPengurus = async () => {
             <TableCell>{formatSektor(item.sektor)}</TableCell>
             <TableCell>
               <div className="flex gap-1">
-                <UpdateButton id={item.id} />
+                <UpdateButton id={item.id} path="pelayan" />
                 <DeleteButton id={item.id} action={DeletePengurus} />
               </div>
             </TableCell>

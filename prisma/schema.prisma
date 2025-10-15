@@ -78,6 +78,16 @@ model JadwalIbadah {
   eka       Pelayan? @relation("EkaRelation", fields: [ekaId], references: [id])
 }
 
+model Kegiatan {
+  id    String @id @default(cuid())
+  image String
+  title String
+  alt   String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 enum Sektor {
   Sektor_1
   Sektor_2

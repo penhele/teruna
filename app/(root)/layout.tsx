@@ -6,7 +6,7 @@ export default function PublicLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div>
+    <div className="mt-12">
       <Navbar />
       <main>{children}</main>
     </div>

@@ -1,7 +1,12 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import { JadwalIbadahSchema, PelayanSchema, TerunaSchema } from "./zod";
+import {
+  JadwalIbadahSchema,
+  KegiatanSchema,
+  PelayanSchema,
+  TerunaSchema,
+} from "./zod";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 
@@ -109,7 +114,52 @@ export const SaveJadwalIbadah = async (
   redirect("/dashboard/jadwal-ibadah");
 };
 
+export const SaveKegiatan = async (
+  image: string,
+  prevState: unknown,
+  formData: FormData,
+) => {
+  if (!image) return { message: "Image is Required" };
+
+  const rawData = {
+    title: formData.get("title"),
+    alt: formData.get("alt"),
+  };
+
+  const validatedFields = KegiatanSchema.safeParse(rawData);
+  if (!validatedFields.success)
+    return { error: validatedFields.error.flatten().fieldErrors };
+
+  const { title, alt } = validatedFields.data;
+
+  try {
+    await prisma.kegiatan.create({
+      data: {
+        image,
+        title,
+        alt,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+
+  redirect("/dashboard/kegiatan");
+};
+
 // Delete
+export const DeleteKegiatan = async (id: string) => {
+  try {
+    await prisma.kegiatan.delete({
+      where: { id },
+    });
+  } catch (error) {
+    console.log();
+  }
+
+  revalidatePath("/admin/kegiatan");
+};
+
 export const DeletePengurus = async (id: string) => {
   try {
     await prisma.pelayan.delete({

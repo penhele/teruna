@@ -13,6 +13,7 @@ import { GrGroup } from "react-icons/gr";
 import { RiHome6Line } from "react-icons/ri";
 import { PiChurch, PiFinnTheHuman } from "react-icons/pi";
 import { IoIosLogOut } from "react-icons/io";
+import { IoImagesOutline } from "react-icons/io5";
 import Link from "next/link";
 
 const items = [
@@ -35,6 +36,11 @@ const items = [
     title: "Teruna",
     url: "/dashboard/teruna",
     icon: PiFinnTheHuman,
+  },
+  {
+    title: "Kegiatan",
+    url: "/dashboard/kegiatan",
+    icon: IoImagesOutline,
   },
 ];
 

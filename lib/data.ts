@@ -64,6 +64,16 @@ export const getJadwalIbadah = async () => {
   }
 };
 
+export const getKegiatan = async () => {
+  try {
+    const result = await prisma.kegiatan.findMany();
+    return result;
+  } catch (error) {
+    console.log();
+    return [];
+  }
+};
+
 export const getJadwalIbadahById = async (jadwalIbadahId: string) => {
   try {
     const result = await prisma.jadwalIbadah.findUnique({

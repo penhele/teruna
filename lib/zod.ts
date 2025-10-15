@@ -118,3 +118,13 @@ export const JadwalIbadahSchema = object({
       message: "Waktu ibadah wajib diisi.",
     }),
 });
+
+export const KegiatanSchema = object({
+  title: string().refine((val) => val.trim().length > 0, {
+    message: "Judul wajib diisi.",
+  }),
+
+  alt: string().refine((val) => val.trim().length > 0, {
+    message: "Teks alternative wajib diisi.",
+  }),
+});

@@ -1,4 +1,4 @@
-import CarouselImage from "@/components/home/image-carousel";
+import CarouselImage from "@/components/home/carousel-image";
 import JadwalIbadah from "@/components/home/jadwal-ibadah";
 import PelayananKategorial from "@/components/home/pelayanan-kategorial";
 

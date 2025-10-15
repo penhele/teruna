@@ -13,9 +13,9 @@ const page = () => {
     <div>
       <Link href={"/dashboard/teruna/create"}>
         <Button>Add New</Button>
-
-        <ReadTeruna />
       </Link>
+
+      <ReadTeruna />
     </div>
   );
 };

@@ -23,11 +23,26 @@ export const getPelayanById = async (pelayanId: string) => {
 
 export const getTeruna = async () => {
   try {
-    const result = await prisma.teruna.findMany();
+    const result = await prisma.teruna.findMany({
+      orderBy: {
+        name: "asc",
+      },
+    });
     return result;
   } catch (error) {
     console.error("Error fetching teruna:", error);
     return [];
+  }
+};
+
+export const getTerunaById = async (terunaId: string) => {
+  try {
+    const result = await prisma.teruna.findUnique({
+      where: { id: terunaId },
+    });
+    return result;
+  } catch (error) {
+    console.error("Error fetching teruna by id:", error);
   }
 };
 

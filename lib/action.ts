@@ -227,3 +227,41 @@ export const UpdateJadwalIbadah = async (
   revalidatePath("/dashboard/jadwal-ibadah");
   redirect("/dashboard/jadwal-ibadah");
 };
+
+export const UpdateTeruna = async (
+  terunaId: string,
+  prevState: unknown,
+  formData: FormData,
+) => {
+  const rawData = {
+    name: formData.get("name"),
+    phone: formData.get("phone"),
+    gender: formData.get("gender"),
+    birth: formData.get("birth"),
+    sektor: formData.get("sektor"),
+  };
+
+  const validatedFields = TerunaSchema.safeParse(rawData);
+  if (!validatedFields.success)
+    return { error: validatedFields.error.flatten().fieldErrors };
+
+  const { name, phone, gender, birth, sektor } = validatedFields.data;
+
+  try {
+    await prisma.teruna.update({
+      where: { id: terunaId },
+      data: {
+        name,
+        phone,
+        gender,
+        birth,
+        sektor,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+
+  revalidatePath("/dashboard/teruna");
+  redirect("/dashboard/teruna");
+};

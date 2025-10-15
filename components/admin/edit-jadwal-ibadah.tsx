@@ -1,5 +1,5 @@
 import React from "react";
-import { getJadwalIbadahById, getPelayanById } from "@/lib/data";
+import { getJadwalIbadahById } from "@/lib/data";
 import { notFound } from "next/navigation";
 import EditFormJadwalIbadah from "./edit-form-jadwal-ibadah";
 

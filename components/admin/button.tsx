@@ -1,7 +1,6 @@
-import { DeletePengurus } from "@/lib/action";
 import Link from "next/link";
 import React from "react";
-import { IoPencil, IoPencilOutline, IoTrashOutline } from "react-icons/io5";
+import { IoPencil, IoTrashOutline } from "react-icons/io5";
 
 type DeleteButtonProps = {
   id: string;

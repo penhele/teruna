@@ -69,7 +69,7 @@ export const getKegiatan = async () => {
     const result = await prisma.kegiatan.findMany();
     return result;
   } catch (error) {
-    console.log();
+    console.log(error);
     return [];
   }
 };

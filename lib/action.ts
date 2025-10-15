@@ -154,7 +154,7 @@ export const DeleteKegiatan = async (id: string) => {
       where: { id },
     });
   } catch (error) {
-    console.log();
+    console.log(error);
   }
 
   revalidatePath("/admin/kegiatan");
@@ -166,7 +166,7 @@ export const DeletePengurus = async (id: string) => {
       where: { id },
     });
   } catch (error) {
-    console.log();
+    console.log(error);
   }
 
   revalidatePath("/admin/pelayan");
@@ -178,7 +178,7 @@ export const DeleteJadwalIbadahWithId = async (id: string) => {
       where: { id },
     });
   } catch (error) {
-    console.log();
+    console.log(error);
   }
 
   revalidatePath("/admin/jadwal-ibadah");
@@ -190,7 +190,7 @@ export const DeleteTerunaWithId = async (id: string) => {
       where: { id },
     });
   } catch (error) {
-    console.log();
+    console.log(error);
   }
 
   revalidatePath("/admin/jadwal-ibadah");

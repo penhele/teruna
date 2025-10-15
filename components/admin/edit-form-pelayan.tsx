@@ -4,7 +4,7 @@ import React, { useActionState, useEffect, useState } from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { SavePelayan, UpdatePelayan } from "@/lib/action";
+import { UpdatePelayan } from "@/lib/action";
 import {
   DropdownMenu,
   DropdownMenuContent,

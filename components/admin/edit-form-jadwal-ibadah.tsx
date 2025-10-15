@@ -19,7 +19,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { SaveJadwalIbadah, UpdateJadwalIbadah } from "@/lib/action";
+import { UpdateJadwalIbadah } from "@/lib/action";
 import { JadwalIbadahProps } from "@/types/jadwal-ibadah";
 
 const EditFormJadwalIbadah = ({
